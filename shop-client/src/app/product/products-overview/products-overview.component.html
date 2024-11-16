@@ -1,0 +1,22 @@
+<div fxLayoutAlign="center center" class="main-container">
+  <div fxFlex="80%">
+    <div fxLayout="column" fxLayoutAlign="space-around end">
+      <mat-form-field appearance="outline">
+        <mat-label>Cautare</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input />
+      </mat-form-field>
+    </div>
+    <div fxLayout="column">
+      <div fxLayout="row wrap" fxLayoutGap="1% grid">
+        <div fxFlex="20%" *ngFor="let product of pagedProducts">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+      </div>
+      <div>
+        <mat-paginator [length]="filteredProducts.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+          (page)="pageChanged($event)">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

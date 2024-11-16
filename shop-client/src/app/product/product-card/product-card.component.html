@@ -1,0 +1,14 @@
+<mat-card class="product-card" [ngClass]="{'not-available': !product.isAvailable}" [routerLink]="isAdmin() ? ['/product/edit', product.id] : ['/product', product.id]">
+  <img
+    src="https://ro.store.asus.com/media/catalog/product/_/x/_xi7ozoiefj179vae.png?width=439&height=439&store=ro_RO&image-type=image"
+    alt="Product Image" class="product-image" />
+  <mat-card-header class="card-header" fxLayout="column">
+    <div>
+      <p class="card-title" [matTooltip]="product.name" [ngStyle]="{'textOverflow': 'ellipsis', 'whiteSpace': 'nowrap', 'overflow': 'hidden'}">
+        {{ product.name }}
+      </p>
+      <p *ngIf="product.isAvailable" class="availability-text">Available</p>
+      <p *ngIf="!product.isAvailable" class="availability-text unavailable">Not Available</p>
+    </div>
+  </mat-card-header>
+</mat-card>

@@ -1,0 +1,31 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="main-container">
+    <mat-card fxFlex="40%" class="category-create-card">
+        <mat-card-content>
+            <div fxLayout="column" fxLayoutAlign="space-around">
+                <form>
+                    <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="2%">
+                        <div>
+                            <div *ngIf="imagePreview" class="image-preview" fxLayout="column"
+                                fxLayoutAlign="center center">
+                                <img [src]="imagePreview" alt="Preview Image" />
+                            </div>
+                            <input type="file" #fileInput (change)="onFileSelected($event)" hidden>
+                        </div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input matInput />
+                        </mat-form-field>
+                    </div>
+                </form>
+                <div fxLayout="row" fxLayoutGap="1%" fxLayoutAlign="end">
+                    <button mat-raised-button color="primary" (click)="fileInput.click()">
+                        Upload image
+                    </button>
+                    <button mat-raised-button type="submit" color="primary">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

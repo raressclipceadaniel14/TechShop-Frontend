@@ -1,0 +1,37 @@
+.category-card {
+    cursor: pointer;
+    border-radius: 0;
+    background-color: white;
+    box-shadow: 2px 2px 7px 3px rgb(209, 209, 209);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  
+  .category-card:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+  
+  .card-title {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .category-image {
+    margin: 5%;
+  }
+  
+  :host {
+    width: 30%;
+    height: 30%;
+  }
+  
+  .action-buttons {
+    margin-bottom: 3%;
+    margin-right: 3%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .category-card:hover .action-buttons {
+    opacity: 1;
+  }

@@ -1,0 +1,59 @@
+.product-card {
+  cursor: pointer;
+  border-radius: 0;
+  background-color: white;
+  box-shadow: 2px 2px 7px 3px rgb(209, 209, 209);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.product-image {
+  margin: 5%;
+}
+
+:host {
+  width: 30%;
+  height: 30%;
+}
+
+.action-buttons {
+  margin-bottom: 3%;
+  margin-right: 3%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.product-card:hover .action-buttons {
+  opacity: 1;
+}
+
+.availability-text {
+  font-size: 0.8em;
+  color: green;
+  margin-top: 1%;
+}
+
+.availability-text.unavailable {
+  color: #ff0000;
+}
+
+.product-card.not-available {
+  background-color: #d3d3d3;
+}
+
+.product-card.not-available .product-image {
+  opacity: 0.5;
+}
+
+.product-card.not-available .card-header {
+  opacity: 0.5;
+}

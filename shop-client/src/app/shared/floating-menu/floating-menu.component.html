@@ -1,0 +1,22 @@
+<div>
+    <div [matMenuTriggerFor]="menu">
+        <button mat-fab color="primary">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+
+    <mat-menu #menu="matMenu" class="custom-menu">
+        <button mat-menu-item routerLink="categories">Categories</button>
+        <button mat-menu-item routerLink="">Favorites</button>
+        <button mat-menu-item routerLink="">Cart</button>
+        <button mat-menu-item routerLink="">Profile</button>
+        <button mat-menu-item [matMenuTriggerFor]="adminMenu" *ngIf="isAdmin()">Admin</button>
+        <button mat-menu-item routerLink="" (click)="logout()">Logout</button>
+    </mat-menu>
+
+    <mat-menu #adminMenu="matMenu">
+        <button mat-menu-item routerLink="product/create">Add Product</button>
+        <button mat-menu-item routerLink="subcategory/create">Add Subcategory</button>
+        <button mat-menu-item routerLink="category/create">Add Category</button>
+    </mat-menu>
+</div>

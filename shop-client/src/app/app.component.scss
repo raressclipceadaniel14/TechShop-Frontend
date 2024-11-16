@@ -1,0 +1,14 @@
+.content {
+    margin-top: 3%;
+}
+
+.floating-menu-button {
+  position: fixed;
+  bottom: 8%;
+  right: 5%;
+  z-index: 1000;
+}
+
+.custom-menu .mat-menu-item {
+  margin: 5px 0; 
+}
