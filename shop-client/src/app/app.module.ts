@@ -14,7 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -30,27 +30,23 @@ import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@an
 import { ProductCardComponent } from './product/product-card/product-card.component';
 import { ProductsOverviewComponent } from './product/products-overview/products-overview.component';
 import { ProductCreateComponent } from './product/product-create/product-create.component';
-import { CategoryCardComponent } from './category/category-card/category-card.component';
 import { CategoriesOverviewComponent } from './category/categories-overview/categories-overview.component';
-import { SubcategoryCardComponent } from './subcategory/subcategory-card/subcategory-card.component';
-import { SubcategoriesOverviewComponent } from './subcategory/subcategories-overview/subcategories-overview.component';
 import { SubcategoryCreateComponent } from './subcategory/subcategory-create/subcategory-create.component';
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { FloatingMenuComponent } from './shared/floating-menu/floating-menu.component';
 import { RegisterComponent } from './register/register.component';
+import { NavigationBarComponent } from './shared/navigation-bar/navigation-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavigationBarComponent,
     LoginComponent,
     ProductCardComponent,
     ProductsOverviewComponent,
     ProductCreateComponent,
-    CategoryCardComponent,
     CategoriesOverviewComponent,
-    SubcategoryCardComponent,
-    SubcategoriesOverviewComponent,
     SubcategoryCreateComponent,
     CategoryCreateComponent,
     ProductEditComponent,
@@ -84,7 +80,9 @@ import { RegisterComponent } from './register/register.component';
     MatSortModule,
     MatSnackBarModule,
     MatError,
-    MatLabel
+    MatLabel,
+    MatMenu,
+    MatToolbarModule
   ],
   exports: [
     BrowserModule,
@@ -112,7 +110,8 @@ import { RegisterComponent } from './register/register.component';
     MatSortModule,
     MatSnackBarModule,
     MatError,
-    MatLabel
+    MatLabel,
+    MatToolbarModule
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

@@ -1,0 +1,12 @@
+<div class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="this.isUserLoggedIn()">
+  <div *ngIf="this.isUserLoggedIn()">
+    <button mat-button [matMenuTriggerFor]="menu" class="navbar-button">
+      {{ this.getUserFirstName() }}
+      {{ this.getUserLastName() }}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="profile">Profil</button>
+      <button mat-menu-item (click)="this.logout()">Deconectare</button>
+    </mat-menu>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { CategoryModel } from '../../models/CategoryModel';
 import { CategoryService } from '../../services/category.service';
 import { tap } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
+import { SubcategoryService } from '../../services/subcategory.service';
 
 @Component({
   selector: 'app-categories-overview',
@@ -11,14 +12,13 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class CategoriesOverviewComponent {
   categories: CategoryModel[] = [];
-  filteredCategories: CategoryModel[] = [];
   pagedCategories: CategoryModel[] = [];
-  currentPage: number = 0;
-  pageSize: number = 5;
+  subcategories: CategoryModel[] = [];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  constructor (private categoryService: CategoryService) {}
+  constructor (
+    private categoryService: CategoryService,
+    private subcategoryService: SubcategoryService
+  ) {}
 
   ngAfterViewInit() {
     this.getAllCategories();
@@ -28,30 +28,13 @@ export class CategoriesOverviewComponent {
     this.categoryService.getAllCategories().subscribe(
       (categories) => {
         this.categories = categories;
-        this.filteredCategories = categories;
-        this.updatePagedCategories();
       }
     );
   }
-  
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
-    this.filteredCategories = this.categories.filter(category =>
-      category.name.toLowerCase().includes(filterValue)
-    );
-    this.currentPage = 0;
-    this.updatePagedCategories(); 
-  }
 
-  updatePagedCategories() {
-    const startIndex = this.currentPage * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.pagedCategories = this.filteredCategories.slice(startIndex, endIndex);
-  }
-
-  pageChanged(event: any) {
-    this.currentPage = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.updatePagedCategories();
-  }
+  getSubcategoriesByCategory(categoryId: number) {
+    this.subcategoryService.getSubcategoriesByCategory(categoryId).subscribe((subcategories) => {
+      this.subcategories = subcategories;
+    }
+  )}
 }

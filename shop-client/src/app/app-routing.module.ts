@@ -4,7 +4,6 @@ import { LoginComponent } from './login/login.component';
 import { ProductsOverviewComponent } from './product/products-overview/products-overview.component';
 import { ProductCreateComponent } from './product/product-create/product-create.component';
 import { CategoriesOverviewComponent } from './category/categories-overview/categories-overview.component';
-import { SubcategoriesOverviewComponent } from './subcategory/subcategories-overview/subcategories-overview.component';
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
 import { SubcategoryCreateComponent } from './subcategory/subcategory-create/subcategory-create.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
@@ -35,10 +34,6 @@ const routes: Routes = [
   {
     path: 'categories',
     component: CategoriesOverviewComponent,
-  },
-  {
-    path: 'subcategories/:categoryId',
-    component: SubcategoriesOverviewComponent,
   },
   {
     path: 'category/create',
