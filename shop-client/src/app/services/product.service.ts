@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ProductModel } from '../models/ProductModel';
 import { ProductSaveModel } from '../models/ProductSaveModel';
 import { environment } from '../../environments/environment';
+import { CategoryModel } from '../models/CategoryModel';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,10 @@ export class ProductService {
   deleteProduct(productId: number){
     const url = `${this.baseURL}/Product/delete-product?productId=${productId}`;
     return this.http.post(url, null);
+  }
+
+  getCategoryBySubcategory(subCategoryId: number) : Observable<CategoryModel>{
+    const url = `${this.baseURL}/Product/get-category-by-subcategory?subcategoryId=${subCategoryId}`;
+    return this.http.get<CategoryModel>(url);
   }
 }

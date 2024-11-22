@@ -21,16 +21,16 @@
 
                                 <mat-form-field appearance="outline" fxFlex="100%">
                                     <mat-label>Category</mat-label>
-                                    <mat-select formControlName="category">
-                                        <mat-option *ngFor="let category of categories" [value]="category.id">
+                                    <mat-select formControlName="category" >
+                                        <mat-option *ngFor="let category of categories" [value]="category.id.toString()">
                                             {{ category.name }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex="100%">
                                     <mat-label>Subcategory</mat-label>
-                                    <mat-select formControlName="subcategory">
-                                        <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+                                    <mat-select formControlName="subcategory" >
+                                        <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id.toString()">
                                             {{ subcategory.name }}
                                         </mat-option>
                                     </mat-select>
@@ -40,7 +40,7 @@
                                 <mat-form-field appearance="outline" fxFlex="49%">
                                     <mat-label>Provider</mat-label>
                                     <mat-select formControlName="provider">
-                                        <mat-option *ngFor="let provider of providers" [value]="provider.id">
+                                        <mat-option *ngFor="let provider of providers" [value]="provider.id.toString()">
                                             {{ provider.name }}
                                         </mat-option>
                                     </mat-select>

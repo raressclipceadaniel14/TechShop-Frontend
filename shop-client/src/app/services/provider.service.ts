@@ -13,7 +13,12 @@ export class ProviderService {
   constructor(private http: HttpClient) {}
 
   getAllProviders(): Observable<ProviderModel[]> {
-    const url = `${this.baseURL}/Product/get-providers`;
+    const url = `${this.baseURL}/Provider/get-providers`;
     return this.http.get<ProviderModel[]>(url);
+  }
+
+  getProviderById(providerId: number): Observable<ProviderModel> {
+    const url = `${this.baseURL}/Provider/get-provider-by-id?proproviderId=${providerId}`;
+    return this.http.get<ProviderModel>(url);
   }
 }

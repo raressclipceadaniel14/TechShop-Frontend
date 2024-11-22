@@ -49,6 +49,7 @@ export class ProductEditComponent {
       if (productIdParam) {
         this.getProduct(+productIdParam);
         this.getAllCategories();
+        this.getAllProviders();
       }
     });
   }
@@ -96,7 +97,13 @@ export class ProductEditComponent {
     this.productService.getProductById(productId).subscribe(
       (product: ProductModel) => {
         this.product = product;
-        this.populateForm();
+        this.productService.getCategoryBySubcategory(product.subCategoryId).subscribe((category: CategoryModel) => {
+          this.subcategoryService.getSubcategoriesByCategory(category.id).subscribe((subcategories: SubcategoryModel[]) => {
+            this.subcategories = subcategories;
+            this.imagePreview = product.picture;
+            this.populateForm(category);
+          })
+        });
       }
     )
   }
@@ -115,12 +122,12 @@ export class ProductEditComponent {
     }
   }
 
-  populateForm() {
+  populateForm(category: CategoryModel) {
     this.editProductForm.patchValue({
       name: this.product.name,
-      category: ' ',
+      category: category.id.toString(),
       subcategory: this.product.subCategoryId.toString(),
-      provider: ' ',
+      provider: this.product.providerId.toString(),
       price: this.product.price.toString(),
       description: this.product.description,
       isAvailable: this.product.isAvailable
@@ -151,5 +158,9 @@ export class ProductEditComponent {
     this.providerService.getAllProviders().subscribe((providers) => {
       this.providers = providers;
     });
+  }
+
+  compareFunction(o1: any, o2: any): boolean {
+    return o1 && o2 ? o1.id == o2.id : o1 == o2;
   }
 }

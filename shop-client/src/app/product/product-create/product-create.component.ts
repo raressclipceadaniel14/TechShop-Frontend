@@ -23,6 +23,7 @@ export class ProductCreateComponent {
 
   ngOnInit() {
     this.getAllCategories();
+    this.getAllProviders();
   }
 
   addProductForm = new FormGroup({
