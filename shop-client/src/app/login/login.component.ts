@@ -56,6 +56,6 @@ export class LoginComponent {
   }
 
   redirectToPageByRole() {
-    this.router.navigateByUrl('categories');
+    this.router.navigateByUrl('home');
   }
 }

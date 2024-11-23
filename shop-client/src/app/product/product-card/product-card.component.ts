@@ -14,6 +14,10 @@ export class ProductCardComponent {
     public sessionService: SessionService,
   ) {}
 
+  ngOnInit() {
+    console.log(this.product);
+ }
+
   isAdmin() {
     return this.sessionService.isAdmin();
   }

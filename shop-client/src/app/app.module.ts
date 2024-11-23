@@ -37,6 +37,7 @@ import { ProductEditComponent } from './product/product-edit/product-edit.compon
 import { FloatingMenuComponent } from './shared/floating-menu/floating-menu.component';
 import { RegisterComponent } from './register/register.component';
 import { NavigationBarComponent } from './shared/navigation-bar/navigation-bar.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NavigationBarComponent } from './shared/navigation-bar/navigation-bar.c
     ProductEditComponent,
     FloatingMenuComponent,
     RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,7 @@ import { NavigationBarComponent } from './shared/navigation-bar/navigation-bar.c
     MatError,
     MatLabel,
     MatMenu,
-    MatToolbarModule
+    MatToolbarModule,
   ],
   exports: [
     BrowserModule,

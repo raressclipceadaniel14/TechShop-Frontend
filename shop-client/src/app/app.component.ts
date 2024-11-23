@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SessionService } from './services/session.service';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
@@ -13,5 +14,9 @@ export class AppComponent {
 
   isAuthenticated(): boolean {
     return this.sessionService.isUserLoggedIn();
+  }
+
+  ngOnInit(): void {
+    initFlowbite();
   }
 }

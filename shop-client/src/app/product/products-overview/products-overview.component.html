@@ -1,3 +1,4 @@
+<app-categories-overview></app-categories-overview>
 <div fxLayoutAlign="center center" class="main-container">
   <div fxFlex="80%">
     <div fxLayout="column" fxLayoutAlign="space-around end">
@@ -8,7 +9,7 @@
     </div>
     <div fxLayout="column">
       <div fxLayout="row wrap" fxLayoutGap="1% grid">
-        <div fxFlex="20%" *ngFor="let product of pagedProducts">
+        <div fxFlex="20%" *ngFor="let product of products">
           <app-product-card [product]="product"></app-product-card>
         </div>
       </div>

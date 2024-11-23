@@ -37,5 +37,6 @@ export class NavigationBarComponent {
   }
 
   onLogoClick() {
+    this.router.navigateByUrl('home');
   }
 }

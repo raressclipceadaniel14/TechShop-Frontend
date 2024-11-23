@@ -8,6 +8,7 @@ import { CategoryCreateComponent } from './category/category-create/category-cre
 import { SubcategoryCreateComponent } from './subcategory/subcategory-create/subcategory-create.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,11 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-  },,
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
   {
     path: 'products/:subcategoryId',
     component: ProductsOverviewComponent,
