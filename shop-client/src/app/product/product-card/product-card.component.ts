@@ -21,4 +21,8 @@ export class ProductCardComponent {
   isAdmin() {
     return this.sessionService.isAdmin();
   }
+
+  isUser() {
+    return this.sessionService.isUser();
+  }
 }
