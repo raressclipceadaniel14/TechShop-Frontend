@@ -18,9 +18,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProductEditComponent {
   product: ProductModel;
-  categories: CategoryModel[] = [];
-  subcategories: SubcategoryModel[] = [];
-  providers: ProviderModel[] = [];
+  categoriesOptions: { id: string; viewValue: string }[] = [];
+  subCategoriesOptions: { id: string; viewValue: string }[] = [];
+  providersOptions: { id: string; viewValue: string }[] = [];
+  subcategoryValue: string;
+  providerValue: string;
 
   editProductForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -49,7 +51,6 @@ export class ProductEditComponent {
       if (productIdParam) {
         this.getProduct(+productIdParam);
         this.getAllCategories();
-        this.getAllProviders();
       }
     });
   }
@@ -62,6 +63,7 @@ export class ProductEditComponent {
     const price = this.editProductForm.get('price').value;
     const description = this.editProductForm.get('description').value;
     const isAvailable = this.editProductForm.get('isAvailable').value;
+    const picture = this.imagePreview;
 
     var product: ProductModel = {
       id: this.product.id,
@@ -69,9 +71,9 @@ export class ProductEditComponent {
       description: description,
       price: Number(price),
       isAvailable: Boolean(isAvailable),
-      subCategoryId: 1,
-      providerId: 1,
-      picture: ''
+      subCategoryId: parseInt(subcategory),
+      providerId: parseInt(provider),
+      picture: picture
     }
 
     this.productService.updateProduct(product).subscribe(() => {
@@ -99,11 +101,27 @@ export class ProductEditComponent {
         this.product = product;
         this.productService.getCategoryBySubcategory(product.subCategoryId).subscribe((category: CategoryModel) => {
           this.subcategoryService.getSubcategoriesByCategory(category.id).subscribe((subcategories: SubcategoryModel[]) => {
-            this.subcategories = subcategories;
-            this.imagePreview = product.picture;
-            this.populateForm(category);
+            this.providerService.getAllProviders().subscribe((providers) => {
+              subcategories.forEach(subcategory => {
+                this.subCategoriesOptions.push({ 
+                  id: subcategory.id.toString(), 
+                  viewValue: subcategory.name
+                });
+                this.subcategoryValue = subcategory.id.toString();
+              });
+              providers.forEach(provider => {
+                this.providersOptions.push({ 
+                  id: provider.id.toString(), 
+                  viewValue: provider.name
+                });
+                this.providerValue = provider.id.toString();
+              });
+              this.imagePreview = product.picture;
+            });
           })
+          this.populateForm(category);
         });
+        
       }
     )
   }
@@ -130,34 +148,37 @@ export class ProductEditComponent {
       provider: this.product.providerId.toString(),
       price: this.product.price.toString(),
       description: this.product.description,
-      isAvailable: this.product.isAvailable
+      isAvailable: this.product.isAvailable,
     });
+    console.log(this.editProductForm);
   }
 
   getAllCategories() {
     this.categoryService.getAllCategories().subscribe(
       (categories) => {
-        this.categories = categories;
+        categories.forEach(category => {
+          this.categoriesOptions.push({ 
+            id: category.id.toString(), 
+            viewValue: category.name 
+          });
+        });
       }
     );
   }
 
-  onCategoryChange(categoryId: number) {
-    this.getAllSubcategoriesByCategoryId(categoryId);
-  }
-
-  getAllSubcategoriesByCategoryId(categoryId: number) {
-    this.subcategoryService.getSubcategoriesByCategory(categoryId).subscribe(
+  onCategoryChange(selectedValue: string) {
+    this.subCategoriesOptions = [];
+    this.subcategoryService.getSubcategoriesByCategory(parseInt(selectedValue)).subscribe(
       (subcategories) => {
-        this.subcategories = subcategories;
+        subcategories.forEach(subcategory => {
+          this.subCategoriesOptions.push({ 
+            id: subcategory.id.toString(), 
+            viewValue: subcategory.name
+          });
+        });
+        this.editProductForm.patchValue({subcategory: this.subCategoriesOptions[0].id});
       }
     );
-  }
-
-  getAllProviders() {
-    this.providerService.getAllProviders().subscribe((providers) => {
-      this.providers = providers;
-    });
   }
 
   compareFunction(o1: any, o2: any): boolean {

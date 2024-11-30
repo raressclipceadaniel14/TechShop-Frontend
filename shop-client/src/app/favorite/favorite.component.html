@@ -1,0 +1,7 @@
+<div fxLayoutAlign="center center" class="main-container">
+    <div class="flex flex-col w-4/5">
+        <div class="flex flex-wrap w-full justify-between">
+            <app-product-card *ngFor="let product of wishlist" [product]="product"></app-product-card>
+          </div>
+    </div>
+</div>

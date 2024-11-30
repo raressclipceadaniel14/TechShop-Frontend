@@ -3,6 +3,7 @@ import { ProductModel } from '../../models/ProductModel';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-products-overview',
@@ -20,8 +21,14 @@ export class ProductsOverviewComponent {
   
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    public sessionService: SessionService
   ) {}
+  
+  isAdmin() {
+    return this.sessionService.isAdmin();
+  }
+
 
   ngAfterViewInit() {
     this.route.paramMap.subscribe(params => {
@@ -54,6 +61,10 @@ export class ProductsOverviewComponent {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.pagedProducts = this.filteredProducts.slice(startIndex, endIndex);
+  }
+
+  deleteProduct(id: number) {
+    this.productService.deleteProduct(id).subscribe();
   }
 
   pageChanged(event: any) {

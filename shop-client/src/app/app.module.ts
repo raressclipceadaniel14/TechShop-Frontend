@@ -38,6 +38,10 @@ import { FloatingMenuComponent } from './shared/floating-menu/floating-menu.comp
 import { RegisterComponent } from './register/register.component';
 import { NavigationBarComponent } from './shared/navigation-bar/navigation-bar.component';
 import { HomeComponent } from './home/home.component';
+import { ProductDetailsComponent } from './product/product-details/product-details.component';
+import { SelectFieldComponent } from './shared/select-field/select-field.component';
+import { FavoriteComponent } from './favorite/favorite.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { HomeComponent } from './home/home.component';
     ProductEditComponent,
     FloatingMenuComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ProductDetailsComponent,
+    SelectFieldComponent,
+    FavoriteComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

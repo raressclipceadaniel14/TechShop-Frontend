@@ -9,6 +9,8 @@ import { SubcategoryCreateComponent } from './subcategory/subcategory-create/sub
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { ProductDetailsComponent } from './product/product-details/product-details.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,14 @@ const routes: Routes = [
   {
     path: 'product/edit/:productId',
     component: ProductEditComponent,
+  },
+  {
+    path: 'product/details/:productId',
+    component: ProductDetailsComponent,
+  },
+  {
+    path: 'favorite',
+    component: FavoriteComponent,
   }
 ];
 

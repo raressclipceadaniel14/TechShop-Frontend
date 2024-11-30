@@ -1,74 +1,109 @@
-<div fxLayout="row" fxLayoutAlign="center center" class="main-container">
-    <mat-card fxFlex="70%" class="product-create-card">
-        <mat-card-content>
-            <div fxLayout="column" fxLayoutAlign="space-around">
-                <form [formGroup]="addProductForm" id="addProductForm">
-                    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="2%">
-                        <div>
-                            <div *ngIf="imagePreview" class="image-preview">
-                                <img [src]="imagePreview" alt="Preview Image" />
-                            </div>
-                            <input type="file" #fileInput (change)="onFileSelected($event)" hidden>
-                        </div>
-                        <div fxFlex="60%">
-                            <div>
-                                <mat-form-field appearance="outline" fxFlex="100%">
-                                    <mat-label>Name</mat-label>
-                                    <input matInput formControlName="name" />
-                                </mat-form-field>
-                            </div>
-                            <div fxLayout="row" fxLayoutGap="2%">
-
-                                <mat-form-field appearance="outline" fxFlex="100%">
-                                    <mat-label>Category</mat-label>
-                                    <mat-select formControlName="category"
-                                        (selectionChange)="onCategoryChange($event.value)">
-                                        <mat-option *ngFor="let category of categories" [value]="category.id">
-                                            {{ category.name }}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                                <mat-form-field appearance="outline" fxFlex="100%">
-                                    <mat-label>Subcategory</mat-label>
-                                    <mat-select formControlName="subcategory">
-                                        <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
-                                            {{ subcategory.name }}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                            <div fxLayout="row" fxLayoutGap="2%" fxfill>
-                                <mat-form-field appearance="outline" fxFlex="49%">
-                                    <mat-label>Provider</mat-label>
-                                    <mat-select formControlName="provider">
-                                        <mat-option *ngFor="let provider of providers" [value]="provider.id">
-                                            {{ provider.name }}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                                <mat-form-field appearance="outline" fxFlex="20%">
-                                    <mat-label>Price</mat-label>
-                                    <input matInput formControlName="price" />
-                                </mat-form-field>
-                            </div>
-                            <div>
-                                <mat-form-field appearance="outline" fxFlex="100%">
-                                    <mat-label>Description</mat-label>
-                                    <textarea matInput rows="6" formControlName="description"></textarea>
-                                </mat-form-field>
-                            </div>
-                        </div>
+<div>
+    <div class="w-full h-full flex justify-center p-10">
+        <div class="w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <form [formGroup]="editProductForm">
+                <div class="m-2 !mb-6">
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                    <input formControlName="name" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+                </div>
+                <div class="flex flex-row w-full mb-6">
+                    <div class="m-2 w-1/2">
+                        <div class="relative">
+                            <!-- Label -->
+                            <label for="dynamic-select" class="block text-sm font-medium text-gray-700">
+                              Categories
+                            </label>
+                      
+                            <!-- Dropdown -->
+                            <select
+                              id="dynamic-select"
+                              formControlName="category"
+                              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                              (change)="onCategoryChange(this.editProductForm.controls.category.value)"
+                            >
+                              <option *ngFor="let option of categoriesOptions" [value]="option.id">
+                                {{ option.viewValue }}
+                              </option>
+                            </select>
+                          </div>
                     </div>
-                </form>
-                <div fxLayout="row" fxLayoutGap="1%" fxLayoutAlign="end">
-                    <button mat-raised-button color="primary" (click)="fileInput.click()">
+                    <div class="m-2 w-1/2">
+                        <div class="relative">
+                            <!-- Label -->
+                            <label for="dynamic-select" class="block text-sm font-medium text-gray-700">
+                              Subcategories
+                            </label>
+                      
+                            <!-- Dropdown -->
+                            <select
+                            formControlName="subcategory"
+                              id="dynamic-select"
+                              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                            >
+                              <option *ngFor="let option of subCategoriesOptions" [value]="option.id">
+                                {{ option.viewValue }}
+                              </option>
+                            </select>
+                          </div>
+                    </div>
+                    <!-- <app-select-field  [options]="categoriesOptions" formControlName="category" [onChangeCallback]="onCategoryChange.bind(this)" [preselected]="this.editProductForm.controls.category.value"></app-select-field> -->
+                    <!-- <app-select-field class="m-2 w-1/2" [options]="subCategoriesOptions" formControlName="subcategory" [preselected]="subcategoryValue"></app-select-field> -->
+                </div>
+                <div class="flex flex-row w-full mb-6">
+                    <div class="m-2 w-full">
+                        <div class="relative">
+                            <!-- Label -->
+                            <label for="dynamic-select" class="block text-sm font-medium text-gray-700">
+                              Providers
+                            </label>
+                      
+                            <!-- Dropdown -->
+                            <select
+                            formControlName="provider"
+                              id="dynamic-select"
+                              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                            >
+                              <option *ngFor="let option of providersOptions" [value]="option.id">
+                                {{ option.viewValue }}
+                              </option>
+                            </select>
+                          </div>
+                    </div>
+                </div>
+                <div class="!mb-6 m-2">
+                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                    <input formControlName="price" type="text" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+                </div>
+                <div class="!mb-6 m-2">
+                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                    <input
+                      id="editor"
+                      contenteditable="true"
+                      class="mt-1 p-3 block w-full h-40 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm overflow-y-auto"
+                      formControlName="description"/>
+                </div>
+                <div class="!mb-6 m-2">
+                    <input formControlName="isAvailable" id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Default checkbox</label>
+                </div>
+                <div class="w-full flex justify-center">
+                    <div *ngIf="imagePreview" class="image-preview !mb-6 m-2 flex justify-center h-96 w-96">
+                        <img [src]="imagePreview" alt="Preview Image" />
+                    </div>
+                    <input type="file" #fileInput (change)="onFileSelected($event)" hidden>
+                </div>
+                <div class="!mb-6 m-2 flex justify-end">
+                    <button class="mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" color="primary" (click)="fileInput.click()">
                         Upload image
                     </button>
-                    <button mat-raised-button type="submit" color="primary" (click)="submit()">
+                    <button class="mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit" color="primary" (click)="delete()">
+                        Delete product
+                    </button>
+                    <button class="mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit" color="primary" (click)="submit()">
                         Save
                     </button>
                 </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+            </form> 
+        </div>
+    </div>    
 </div>

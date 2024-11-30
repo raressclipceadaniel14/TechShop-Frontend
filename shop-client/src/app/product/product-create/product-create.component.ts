@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { ProductSaveModel } from '../../models/ProductSaveModel';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { CategoryModel } from '../../models/CategoryModel';
 import { SubcategoryService } from '../../services/subcategory.service';
@@ -10,6 +10,7 @@ import { SubcategoryModel } from '../../models/SubcategoryModel';
 import { ProviderModel } from '../../models/ProviderModel';
 import { ProviderService } from '../../services/provider.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductModel } from '../../models/ProductModel';
 
 @Component({
   selector: 'app-product-create',
@@ -17,60 +18,78 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './product-create.component.scss'
 })
 export class ProductCreateComponent {
-  categories: CategoryModel[] = [];
-  subcategories: SubcategoryModel[] = [];
-  providers: ProviderModel[] = [];
+  product: ProductModel;
+  categoriesOptions: { id: string; viewValue: string }[] = [];
+  subCategoriesOptions: { id: string; viewValue: string }[] = [];
+  providersOptions: { id: string; viewValue: string }[] = [];
+  subcategoryValue: string;
+  providerValue: string;
 
-  ngOnInit() {
-    this.getAllCategories();
-    this.getAllProviders();
-  }
-
-  addProductForm = new FormGroup({
+  editProductForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
     subcategory: new FormControl('', [Validators.required]),
     provider: new FormControl('', [Validators.required]),
     price: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
+    isAvailable: new FormControl(false, [Validators.required]),
   });
 
   imagePreview: string;
   base64Image: string;
 
-  constructor(private productService: ProductService,
+  constructor(
+    private productService: ProductService,
     private categoryService: CategoryService,
     private subcategoryService: SubcategoryService,
     private providerService: ProviderService,
     private snackBar: MatSnackBar,
     private router: Router) { }
 
-  submit() {
-    const name = this.addProductForm.get('name').value;
-    const category = this.addProductForm.get('category').value;
-    const subcategory = this.addProductForm.get('subcategory').value;
-    const provider = this.addProductForm.get('provider').value;
-    const price = this.addProductForm.get('price').value;
-    const description = this.addProductForm.get('description').value;
+  ngOnInit() {
+    this.getAllCategories();
+    this.getAllProviders();
+  }
 
-    var product: ProductSaveModel = {
+  submit() {
+    const name = this.editProductForm.get('name').value;
+    const category = this.editProductForm.get('category').value;
+    const subcategory = this.editProductForm.get('subcategory').value;
+    const provider = this.editProductForm.get('provider').value;
+    const price = this.editProductForm.get('price').value;
+    const description = this.editProductForm.get('description').value;
+    const isAvailable = this.editProductForm.get('isAvailable').value;
+    const picture = this.imagePreview;
+
+    var product: ProductModel = {
       name: name,
       description: description,
       price: Number(price),
-      isAvailable: true,
-      subCategoryId: Number(subcategory),
-      providerId: 1,
-      picture: ''
+      isAvailable: Boolean(isAvailable),
+      subCategoryId: parseInt(subcategory),
+      providerId: parseInt(provider),
+      picture: picture
     }
 
     this.productService.addProduct(product).subscribe(() => {
-      this.addProductForm.reset();
+      const redirectUrl = `/products/${this.product.subCategoryId}`;
+      this.router.navigate([redirectUrl]);
       this.snackBar.open('Product successfully saved', 'Dismiss', {
         duration: 3000,
       });
     });
   }
 
+  delete() {
+    this.productService.deleteProduct(this.product.id).subscribe(() => {
+      const redirectUrl = `/products/${this.product.subCategoryId}`;
+      this.router.navigate([redirectUrl]);
+      this.snackBar.open('Product successfully deleted', 'Dismiss', {
+        duration: 3000,
+      });
+    });
+  }
+  
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -88,26 +107,43 @@ export class ProductCreateComponent {
   getAllCategories() {
     this.categoryService.getAllCategories().subscribe(
       (categories) => {
-        this.categories = categories;
-      }
-    );
-  }
-
-  onCategoryChange(categoryId: number) {
-    this.getAllSubcategoriesByCategoryId(categoryId);
-  }
-
-  getAllSubcategoriesByCategoryId(categoryId: number) {
-    this.subcategoryService.getSubcategoriesByCategory(categoryId).subscribe(
-      (subcategories) => {
-        this.subcategories = subcategories;
+        categories.forEach(category => {
+          this.categoriesOptions.push({ 
+            id: category.id.toString(), 
+            viewValue: category.name 
+          });
+        });
       }
     );
   }
 
   getAllProviders() {
     this.providerService.getAllProviders().subscribe((providers) => {
-      this.providers = providers;
-    });
+      providers.forEach(provider => {
+        this.providersOptions.push({ 
+          id: provider.id.toString(), 
+          viewValue: provider.name 
+        });
+      });
+    })
+  }
+
+  onCategoryChange(selectedValue: string) {
+    this.subCategoriesOptions = [];
+    this.subcategoryService.getSubcategoriesByCategory(parseInt(selectedValue)).subscribe(
+      (subcategories) => {
+        subcategories.forEach(subcategory => {
+          this.subCategoriesOptions.push({ 
+            id: subcategory.id.toString(), 
+            viewValue: subcategory.name
+          });
+        });
+        this.editProductForm.patchValue({subcategory: this.subCategoriesOptions[0].id});
+      }
+    );
+  }
+
+  compareFunction(o1: any, o2: any): boolean {
+    return o1 && o2 ? o1.id == o2.id : o1 == o2;
   }
 }

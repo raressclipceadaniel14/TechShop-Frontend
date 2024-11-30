@@ -1,31 +1,21 @@
-<!-- <mat-card class="product-card" [ngClass]="{'not-available': !product.isAvailable}" [routerLink]="isAdmin() ? ['/product/edit', product.id] : ['/product', product.id]">
-  <img [src]="product.picture" alt="Product Image" class="product-image" />
-  <mat-card-header class="card-header" fxLayout="column">
-    <div>
-      <p class="card-title" [matTooltip]="product.name" [ngStyle]="{'textOverflow': 'ellipsis', 'whiteSpace': 'nowrap', 'overflow': 'hidden'}">
-        {{ product.name }}
-      </p>
-      <p *ngIf="product.isAvailable" class="availability-text">Available</p>
-      <p *ngIf="!product.isAvailable" class="availability-text unavailable">Not Available</p>
-    </div>
-  </mat-card-header>
-</mat-card> -->
-
-
-
 <div class="flex flex-col w-80 h-96 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
   <div class="flex p-2 flex-row justify-between">
-    <button *ngIf="isAdmin()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Delete</button>
-    <button *ngIf="isAdmin()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Update</button>
+    <button (click)="deleteProduct()" *ngIf="isAdmin()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Delete</button>
+    <button [routerLink]="['/product/edit', product.id]" *ngIf="isAdmin()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit</button>
+    <button (click)="addFavorite()" class="flex justify-center">
+      <span class="material-symbols-outlined">
+        favorite
+      </span>
+    </button>
   </div>
   <div *ngIf="isUser()" class="h-2/4 w-full flex justify-center">
     <img class="p-4 rounded-t-lg" [src]="product.picture" alt="product image" />
   </div>
   <div *ngIf="isAdmin()" class="h-2/5 w-full flex justify-center">
-    <img class="p-4 rounded-t-lg" [src]="product.picture" alt="product image" />
+    <img [routerLink]="['/product/details', product.id]" class="cursor-pointer p-4 rounded-t-lg" [src]="product.picture" alt="product image" />
   </div>
   <div class="h-2/4 p-4 flex flex-col justify-between">
-      <h6 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.name }}</h6>
+      <h6 [routerLink]="['/product/details', product.id]" class="cursor-pointer text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.name }}</h6>
       <div class="flex items-center justify-between">
         <span class="text-xl font-bold text-gray-900 dark:text-white">Lei {{ product.price }}</span>
         <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
