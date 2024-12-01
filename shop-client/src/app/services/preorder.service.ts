@@ -14,7 +14,7 @@ export class PreOrderService {
   constructor(private http: HttpClient) {}
 
   getPreorderByUser(userId: number): Observable<ProductModel[]> {
-    const url = `${this.baseURL}/PreOrder/get-preorder-by-user`;
+    const url = `${this.baseURL}/PreOrder/get-preorder-by-user?userId=${userId}`;
     return this.http.get<ProductModel[]>(url);
   }
 

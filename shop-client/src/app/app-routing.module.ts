@@ -11,6 +11,8 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,14 @@ const routes: Routes = [
   {
     path: 'favorite',
     component: FavoriteComponent,
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+  },
+  {
+    path: 'order',
+    component: OrderComponent,
   }
 ];
 

@@ -4,6 +4,8 @@ import { SessionService } from '../../services/session.service';
 import { ProductService } from '../../services/product.service';
 import { FavoriteService } from '../../services/favorite.service';
 import { FavoriteModel } from '../../models/FavoriteModel';
+import { PreOrderService } from '../../services/preorder.service';
+import { PreOrderSaveModel } from '../../models/PreOrderSaveModel';
 
 @Component({
   selector: 'app-product-card',
@@ -16,7 +18,8 @@ export class ProductCardComponent {
   constructor(
     public sessionService: SessionService,
     public productService: ProductService,
-    public favoriteService: FavoriteService
+    public favoriteService: FavoriteService,
+    public preOrderService: PreOrderService
   ) {}
 
   ngOnInit() {
@@ -42,5 +45,13 @@ export class ProductCardComponent {
       userId: this.sessionService.userId
     }
     this.favoriteService.addFavorite(favorite).subscribe();
+  }
+
+  addToCart() {
+    var preorderModel: PreOrderSaveModel = {
+      productId: this.product.id,
+      userId: this.sessionService.userId
+    }
+    this.preOrderService.savePreOrder(preorderModel).subscribe();
   }
 }

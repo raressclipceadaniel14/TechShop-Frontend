@@ -42,6 +42,7 @@ import { ProductDetailsComponent } from './product/product-details/product-detai
 import { SelectFieldComponent } from './shared/select-field/select-field.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { CartComponent } from './cart/cart.component';
     ProductDetailsComponent,
     SelectFieldComponent,
     FavoriteComponent,
-    CartComponent
+    CartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
