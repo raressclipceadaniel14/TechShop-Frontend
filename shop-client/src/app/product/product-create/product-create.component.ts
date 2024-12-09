@@ -32,7 +32,7 @@ export class ProductCreateComponent {
     provider: new FormControl('', [Validators.required]),
     price: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    isAvailable: new FormControl(false, [Validators.required]),
+    stock: new FormControl('', [Validators.required]),
   });
 
   imagePreview: string;
@@ -58,14 +58,14 @@ export class ProductCreateComponent {
     const provider = this.editProductForm.get('provider').value;
     const price = this.editProductForm.get('price').value;
     const description = this.editProductForm.get('description').value;
-    const isAvailable = this.editProductForm.get('isAvailable').value;
+    const stock = this.editProductForm.get('stock').value;
     const picture = this.imagePreview;
 
     var product: ProductModel = {
       name: name,
       description: description,
       price: Number(price),
-      isAvailable: Boolean(isAvailable),
+      stock: Number(stock),
       subCategoryId: parseInt(subcategory),
       providerId: parseInt(provider),
       picture: picture

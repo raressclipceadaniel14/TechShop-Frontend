@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ProductModel } from '../models/ProductModel';
 import { PreOrderSaveModel } from '../models/PreOrderSaveModel';
+import { RemoveFromCartModel } from '../models/RemoveFromCartModel';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,10 @@ export class PreOrderService {
   savePreOrder(preOrder: PreOrderSaveModel) {
     const url = `${this.baseURL}/PreOrder/save-preorder`;
     return this.http.post(url, preOrder);
+  }
+
+  removeFromCart(removeFromCartModel: RemoveFromCartModel) {
+    const url = `${this.baseURL}/PreOrder/remove-from-cart`;
+    return this.http.post(url, removeFromCartModel);
   }
 }

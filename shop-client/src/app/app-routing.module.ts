@@ -13,6 +13,7 @@ import { ProductDetailsComponent } from './product/product-details/product-detai
 import { FavoriteComponent } from './favorite/favorite.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'order',
     component: OrderComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminDashboardComponent
   }
 ];
 

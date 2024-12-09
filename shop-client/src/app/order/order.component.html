@@ -1,1 +1,22 @@
-<p>order works!</p>
+<div>
+    <div class="w-full h-full flex justify-center p-10">
+        <div class="w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <form [formGroup]="editProductForm" *ngIf="!placedSuccessfully">
+                <div class="!mb-6 m-2">
+                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                    <input
+                      id="editor"
+                      contenteditable="true"
+                      class="mt-1 p-3 block w-full h-40 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm overflow-y-auto"
+                      formControlName="address"/>
+                </div>
+                <div class="!mb-6 m-2 flex justify-end">
+                    <button class="mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit" color="primary" (click)="submit()">
+                        Place Order
+                    </button>
+                </div>
+            </form>
+            <div *ngIf="placedSuccessfully">Order Places Successfully</div>
+        </div>
+    </div>
+</div>

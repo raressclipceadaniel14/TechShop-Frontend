@@ -4,17 +4,15 @@
             <form [formGroup]="editProductForm">
                 <div class="m-2 !mb-6">
                     <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                    <input formControlName="name" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+                    <input formControlName="name" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name" required />
                 </div>
                 <div class="flex flex-row w-full mb-6">
                     <div class="m-2 w-1/2">
                         <div class="relative">
-                            <!-- Label -->
                             <label for="dynamic-select" class="block text-sm font-medium text-gray-700">
                               Categories
                             </label>
                       
-                            <!-- Dropdown -->
                             <select
                               id="dynamic-select"
                               formControlName="category"
@@ -29,12 +27,10 @@
                     </div>
                     <div class="m-2 w-1/2">
                         <div class="relative">
-                            <!-- Label -->
                             <label for="dynamic-select" class="block text-sm font-medium text-gray-700">
                               Subcategories
                             </label>
                       
-                            <!-- Dropdown -->
                             <select
                             formControlName="subcategory"
                               id="dynamic-select"
@@ -46,18 +42,14 @@
                             </select>
                           </div>
                     </div>
-                    <!-- <app-select-field  [options]="categoriesOptions" formControlName="category" [onChangeCallback]="onCategoryChange.bind(this)" [preselected]="this.editProductForm.controls.category.value"></app-select-field> -->
-                    <!-- <app-select-field class="m-2 w-1/2" [options]="subCategoriesOptions" formControlName="subcategory" [preselected]="subcategoryValue"></app-select-field> -->
                 </div>
                 <div class="flex flex-row w-full mb-6">
                     <div class="m-2 w-full">
                         <div class="relative">
-                            <!-- Label -->
                             <label for="dynamic-select" class="block text-sm font-medium text-gray-700">
                               Providers
                             </label>
                       
-                            <!-- Dropdown -->
                             <select
                             formControlName="provider"
                               id="dynamic-select"
@@ -72,7 +64,7 @@
                 </div>
                 <div class="!mb-6 m-2">
                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                    <input formControlName="price" type="text" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+                    <input formControlName="price" type="text" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Price" required />
                 </div>
                 <div class="!mb-6 m-2">
                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
@@ -83,9 +75,9 @@
                       formControlName="description"/>
                 </div>
                 <div class="!mb-6 m-2">
-                    <input formControlName="isAvailable" id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Default checkbox</label>
-                </div>
+                  <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
+                  <input formControlName="stock" type="text" id="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Stock" required />
+              </div>
                 <div class="w-full flex justify-center">
                     <div *ngIf="imagePreview" class="image-preview !mb-6 m-2 flex justify-center h-96 w-96">
                         <img [src]="imagePreview" alt="Preview Image" />

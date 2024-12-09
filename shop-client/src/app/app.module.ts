@@ -43,6 +43,7 @@ import { SelectFieldComponent } from './shared/select-field/select-field.compone
 import { FavoriteComponent } from './favorite/favorite.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { OrderComponent } from './order/order.component';
     SelectFieldComponent,
     FavoriteComponent,
     CartComponent,
-    OrderComponent
+    OrderComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

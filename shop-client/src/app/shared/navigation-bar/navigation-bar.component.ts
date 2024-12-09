@@ -8,7 +8,12 @@ import { SessionService } from '../../services/session.service';
   styleUrls: ['./navigation-bar.component.scss'],
 })
 export class NavigationBarComponent {
+  sidebarOpen: boolean = false;
   constructor(private sessionService: SessionService, private router: Router) {}
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
 
   logout() {
     this.sessionService.endSession();
