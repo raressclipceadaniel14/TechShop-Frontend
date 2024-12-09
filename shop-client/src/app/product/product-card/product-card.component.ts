@@ -26,7 +26,6 @@ export class ProductCardComponent {
   ) {}
 
   ngOnInit() {
-    console.log(this.product);
  }
 
   isAdmin() {
