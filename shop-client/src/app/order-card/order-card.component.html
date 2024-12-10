@@ -1,0 +1,10 @@
+<div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-2">
+    <div><b>Email:</b> {{order.userEmail}}</div>
+    <div><b>First Name:</b> {{order.userLastName}}</div><div>Last Name: {{order.userFirstName}}</div>
+    <div><b>Placement Date: </b>{{order.placementDate}}</div>
+    <div><b>Address: </b>{{order.address}}</div>
+    <div><b>Order Status: </b>{{order.orderStatus}}</div>
+    <div><b>Payment Method: </b>{{order.paymentMethod}}</div>
+    <div><b>Products:</b></div>
+    <div *ngFor="let product of order.products">{{product.name}}</div>
+</div>

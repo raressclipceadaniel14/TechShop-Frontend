@@ -1,1 +1,5 @@
-<p>admin-dashboard works!</p>
+<div class="w-full flex justify-center flex-col items-center">
+    <div class="flex justify-center m-2 flex-col w-1/2">
+        <app-order-card *ngFor="let order of orders" [order]="order"></app-order-card>
+    </div>
+</div>
