@@ -22,4 +22,9 @@ export class OrderService {
     const url = `${this.baseURL}/Order/get-orders`;
     return this.http.get<GetOrdersModel[]>(url);
   }
+
+  updateStatus(orderId: number) {
+    const url = `${this.baseURL}/Order/update-status`;
+    return this.http.post(url, orderId);
+  }
 }
