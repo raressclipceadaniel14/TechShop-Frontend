@@ -24,3 +24,4 @@ export class OrderCardComponent {
     });
   }
 }
+`2`

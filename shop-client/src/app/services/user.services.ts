@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   register(registerModel: RegisterModel) {
-    const url = `${this.baseURL}/Auth/register`;
+    const url = `${this.baseURL}/Auth/register`; 
     return this.http.post(url, registerModel);
   }
 }
