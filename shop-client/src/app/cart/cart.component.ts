@@ -10,6 +10,7 @@ import { ProductModel } from '../models/ProductModel';
 })
 export class CartComponent {
   preOrder: ProductModel[] = []; 
+  totalCost: number = 0;
 
   constructor(
     public sessionService: SessionService,
@@ -24,6 +25,9 @@ export class CartComponent {
   getPreOrder(userId: number) {
     this.preOrderService.getPreorderByUser(userId).subscribe((products: ProductModel[]) => {
       this.preOrder = products;
+      products.forEach(product => {
+        this.totalCost += product.price;
+      });
     });
   }
 }

@@ -11,6 +11,7 @@ import { ProviderModel } from '../../models/ProviderModel';
 import { ProviderService } from '../../services/provider.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductModel } from '../../models/ProductModel';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-product-create',
@@ -44,7 +45,8 @@ export class ProductCreateComponent {
     private subcategoryService: SubcategoryService,
     private providerService: ProviderService,
     private snackBar: MatSnackBar,
-    private router: Router) { }
+    private router: Router,
+    public notificationService: NotificationService) { }
 
   ngOnInit() {
     this.getAllCategories();
@@ -72,11 +74,7 @@ export class ProductCreateComponent {
     }
 
     this.productService.addProduct(product).subscribe(() => {
-      const redirectUrl = `/products/${this.product.subCategoryId}`;
-      this.router.navigate([redirectUrl]);
-      this.snackBar.open('Product successfully saved', 'Dismiss', {
-        duration: 3000,
-      });
+      this.notificationService.showNotification('Added to favorites successfully!');
     });
   }
 
