@@ -23,6 +23,11 @@ export class OrderService {
     return this.http.get<GetOrdersModel[]>(url);
   }
 
+  getOrdersByUserId(): Observable<GetOrdersModel[]>{
+    const url = `${this.baseURL}/Order/get-orders-by-user-id`;
+    return this.http.get<GetOrdersModel[]>(url);
+  }
+
   updateStatus(orderId: number) {
     const url = `${this.baseURL}/Order/update-status`;
     return this.http.post(url, orderId);

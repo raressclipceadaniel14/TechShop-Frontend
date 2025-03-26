@@ -19,13 +19,13 @@ export class PreOrderService {
     return this.http.get<ProductModel[]>(url);
   }
 
-  savePreOrder(preOrder: PreOrderSaveModel) {
+  savePreOrder(preOrder: PreOrderSaveModel): Observable<PreOrderSaveModel> {
     const url = `${this.baseURL}/PreOrder/save-preorder`;
-    return this.http.post(url, preOrder);
+    return this.http.post<PreOrderSaveModel>(url, preOrder);
   }
 
-  removeFromCart(removeFromCartModel: RemoveFromCartModel) {
+  removeFromCart(removeFromCartModel: RemoveFromCartModel): Observable<RemoveFromCartModel> {
     const url = `${this.baseURL}/PreOrder/remove-from-cart`;
-    return this.http.post(url, removeFromCartModel);
+    return this.http.post<RemoveFromCartModel>(url, removeFromCartModel);
   }
 }
