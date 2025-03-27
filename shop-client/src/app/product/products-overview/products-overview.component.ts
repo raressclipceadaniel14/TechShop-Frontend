@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ProductModel } from '../../models/ProductModel';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { SessionService } from '../../services/session.service';
@@ -18,7 +18,7 @@ export class ProductsOverviewComponent {
   pageSize: number = 10;
 
   searchText: string = '';
-  predictiveResults: string[] = [];
+  predictiveResults: { id: number, name: string }[] = [];
   showSuggestions: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,7 +26,8 @@ export class ProductsOverviewComponent {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    public sessionService: SessionService
+    public sessionService: SessionService,
+    private router: Router
   ) {}
 
   isAdmin() {
@@ -56,7 +57,7 @@ export class ProductsOverviewComponent {
     const input = (event.target as HTMLInputElement);
     const filterValue = input.value.toLowerCase();
     this.searchText = input.value;
-  
+
     if (!filterValue.trim()) {
       this.filteredProducts = [...this.products];
       this.predictiveResults = [];
@@ -65,52 +66,47 @@ export class ProductsOverviewComponent {
       this.updatePagedProducts();
       return;
     }
-  
+
     const threshold = 0.1;
-  
+
     if (filterValue.length === 1) {
-      // Fallback to basic includes for single letter input
       this.filteredProducts = this.products.filter(product =>
         product.name.toLowerCase().includes(filterValue)
       );
-  
+
       this.predictiveResults = this.products
         .filter(p => p.name.toLowerCase().includes(filterValue))
-        .map(p => p.name)
+        .map(p => ({ id: p.id, name: p.name }))
         .slice(0, 5);
-  
+
     } else {
-      // Use Dice coefficient
       this.filteredProducts = this.products.filter(product =>
         this.diceCoefficient(product.name, filterValue) > threshold
       );
-  
+
       this.predictiveResults = this.products
         .map(p => ({
+          id: p.id,
           name: p.name,
           score: this.diceCoefficient(p.name, filterValue)
         }))
         .filter(entry => entry.score > threshold)
         .sort((a, b) => b.score - a.score)
         .slice(0, 5)
-        .map(entry => entry.name);
+        .map(entry => ({ id: entry.id, name: entry.name }));
     }
-  
+
     this.showSuggestions = this.predictiveResults.length > 0;
     this.currentPage = 0;
     this.updatePagedProducts();
   }
-  
-  
 
-  selectSuggestion(suggestion: string) {
-    this.searchText = suggestion;
-    this.filteredProducts = this.products.filter(product =>
-      product.name.toLowerCase().includes(suggestion.toLowerCase())
-    );
-    this.predictiveResults = [];
+  selectSuggestion(suggestion: { id: number, name: string }) {
+    this.searchText = suggestion.name;
     this.showSuggestions = false;
-    this.updatePagedProducts();
+    this.predictiveResults = [];
+
+    this.router.navigate(['/product/details', suggestion.id]);
   }
 
   updatePagedProducts() {
