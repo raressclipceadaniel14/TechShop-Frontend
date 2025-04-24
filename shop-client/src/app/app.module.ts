@@ -45,6 +45,7 @@ import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { OrderCardComponent } from './order-card/order-card.component';
+import { SpecificationSearchComponent } from './specification-search/specification-search.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { OrderCardComponent } from './order-card/order-card.component';
     CartComponent,
     OrderComponent,
     AdminDashboardComponent,
-    OrderCardComponent
+    OrderCardComponent,
+    SpecificationSearchComponent
   ],
   imports: [
     BrowserModule,

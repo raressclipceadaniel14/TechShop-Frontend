@@ -14,6 +14,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { SpecificationSearchComponent } from './specification-search/specification-search.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent
+  },
+  {
+    path: 'spec-search',
+    component: SpecificationSearchComponent
   }
 ];
 
